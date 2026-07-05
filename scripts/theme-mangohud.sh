@@ -2,11 +2,11 @@
 # Switch to MangoHud gaming theme and start the system monitor
 cd "$(dirname "$0")"
 
-# Save current theme
+# Save current theme (only if not already MangoHudTheme)
 STATE_DIR="$HOME/.config/mangohud-turing-theme"
 mkdir -p "$STATE_DIR"
 CURRENT=$(grep 'THEME:' config.yaml | sed 's/.*THEME: *//')
-if [ -n "$CURRENT" ]; then
+if [ -n "$CURRENT" ] && [ "$CURRENT" != "MangoHudTheme" ]; then
     echo "$CURRENT" > "$STATE_DIR/previous-theme.txt"
 fi
 

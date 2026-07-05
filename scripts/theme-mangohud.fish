@@ -4,7 +4,7 @@ cd (dirname (status --current-filename))
 set -l state_dir "$HOME/.config/mangohud-turing-theme"
 mkdir -p "$state_dir"
 set -l current (grep 'THEME:' config.yaml | sed 's/.*THEME: *//')
-if test -n "$current"
+if test -n "$current" -a "$current" != "MangoHudTheme"
     echo "$current" > "$state_dir/previous-theme.txt"
 end
 
