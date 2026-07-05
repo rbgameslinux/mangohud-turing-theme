@@ -5,8 +5,10 @@ cd "$(dirname "$0")"
 # Save current theme
 STATE_DIR="$HOME/.config/mangohud-turing-theme"
 mkdir -p "$STATE_DIR"
-CURRENT=$(grep '^THEME:' config.yaml | sed 's/^THEME: *//')
-echo "$CURRENT" > "$STATE_DIR/previous-theme.txt"
+CURRENT=$(grep 'THEME:' config.yaml | sed 's/.*THEME: *//')
+if [ -n "$CURRENT" ]; then
+    echo "$CURRENT" > "$STATE_DIR/previous-theme.txt"
+fi
 
 sed -i 's/THEME: .*/THEME: MangoHudTheme/' config.yaml
 echo "Tema alterado para MangoHudTheme"

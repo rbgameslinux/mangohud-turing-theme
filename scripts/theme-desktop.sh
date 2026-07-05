@@ -4,7 +4,7 @@ cd "$(dirname "$0")"
 
 STATE_DIR="$HOME/.config/mangohud-turing-theme"
 SAVED_THEME="3.5inchTheme2"
-if [ -f "$STATE_DIR/previous-theme.txt" ]; then
+if [ -f "$STATE_DIR/previous-theme.txt" ] && [ -s "$STATE_DIR/previous-theme.txt" ]; then
     SAVED_THEME=$(cat "$STATE_DIR/previous-theme.txt")
 fi
 
