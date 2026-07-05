@@ -2,6 +2,8 @@
 
 Exibe dados do MangoHud (FPS, temperaturas, uso de CPU/GPU) na **Turing Smart Screen** enquanto você joga.
 
+![Preview](screenshots/theme-preview.jpg)
+
 ## Funciona com
 
 - [turing-smart-screen-python](https://github.com/mathoudebine/turing-smart-screen-python)
