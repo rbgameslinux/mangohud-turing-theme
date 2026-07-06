@@ -21,7 +21,7 @@ class _MangoHudCache:
         folder = Path(_MH_CSV_DIR)
         if not folder.exists():
             return None
-        files = sorted(folder.glob("*.csv"))
+        files = sorted(folder.glob("*.csv"), key=lambda f: f.stat().st_mtime)
         return files[-1] if files else None
 
     @classmethod
