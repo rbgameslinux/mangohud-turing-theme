@@ -114,9 +114,56 @@ class _MangoHudBase(CustomDataSource):
         return self.last_val
 
 
+class MangoHudDistro(CustomDataSource):
+    _distro: str = None
+
+    def __init__(self):
+        if MangoHudDistro._distro is None:
+            try:
+                with open("/etc/os-release") as f:
+                    for line in f:
+                        if line.startswith("PRETTY_NAME="):
+                            MangoHudDistro._distro = (
+                                line.split("=", 1)[1].strip().strip('"')
+                            )
+                            break
+            except Exception:
+                MangoHudDistro._distro = "Linux"
+            if MangoHudDistro._distro is None:
+                MangoHudDistro._distro = "Linux"
+        self.value = MangoHudDistro._distro
+
+    def as_numeric(self) -> float:
+        pass
+
+    def as_string(self) -> str:
+        return MangoHudDistro._distro or "Linux"
+
+    def last_values(self) -> List[float]:
+        pass
+
+
 class MangoHudFPS(_MangoHudBase):
     _field = "fps"
     _unit = " FPS"
+    _max_sane = 240
+
+    def as_numeric(self) -> float:
+        self.value = _MangoHudCache.get(self._field)
+        if self.value is not None and not math.isnan(self.value) and self.value > self._max_sane:
+            self.value = math.nan
+        if not math.isnan(self.value):
+            self.last_val.append(self.value)
+            self.last_val.pop(0)
+        return self.value
+
+    def as_string(self) -> str:
+        valid = [v for v in self.last_val if not math.isnan(v)]
+        if not valid:
+            return "---"
+        window = valid[-5:]
+        avg = sum(window) / len(window)
+        return f'{avg:>5.1f}{self._unit}'
 
 
 class MangoHudFrametime(_MangoHudBase):
