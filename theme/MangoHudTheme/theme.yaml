@@ -92,11 +92,21 @@ STATS:
   CUSTOM:
     INTERVAL: 1
 
-    MangoHudFPS:
+    MangoHudDistro:
       TEXT:
         SHOW: True
         X: 10
         Y: 35
+        FONT: roboto-mono/RobotoMono-Bold.ttf
+        FONT_SIZE: 42
+        FONT_COLOR: 0, 255, 0
+        BACKGROUND_IMAGE: background.png
+
+    MangoHudFPS:
+      TEXT:
+        SHOW: True
+        X: 10
+        Y: 420
         FONT: roboto-mono/RobotoMono-Bold.ttf
         FONT_SIZE: 42
         FONT_COLOR: 0, 255, 0
@@ -121,7 +131,7 @@ STATS:
       TEXT:
         SHOW: True
         X: 210
-        Y: 56
+        Y: 445
         FONT: jetbrains-mono/JetBrainsMono-Bold.ttf
         FONT_SIZE: 15
         FONT_COLOR: 180, 180, 180
