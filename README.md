@@ -80,8 +80,8 @@ THEME: 3.5inchTheme2     # para desktop
 Adicione no `~/.config/niri/config.kdl`:
 
 ```kdl
-Mod+Z { spawn "/caminho/para/turing-smart-screen-python/theme-mangohud.fish"; }
-Mod+X { spawn "/caminho/para/turing-smart-screen-python/theme-desktop.fish"; }
+Mod+Z { spawn "/caminho/para/turing-smart-screen-python/theme-mangohud.sh"; }
+Mod+X { spawn "/caminho/para/turing-smart-screen-python/theme-desktop.sh"; }
 ```
 
 ## Adicionar/remover dados no tema
