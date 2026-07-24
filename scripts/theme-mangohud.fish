@@ -1,6 +1,10 @@
 #!/usr/bin/env fish
 cd (dirname (status --current-filename))
 
+# Kill any existing main.py process to prevent display conflicts
+pkill -f "python3 main.py" 2>/dev/null
+sleep 1
+
 set -l state_dir "$HOME/.config/mangohud-turing-theme"
 mkdir -p "$state_dir"
 set -l current (grep 'THEME:' config.yaml | sed 's/.*THEME: *//')

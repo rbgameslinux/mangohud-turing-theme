@@ -2,6 +2,10 @@
 # Switch to MangoHud gaming theme and start the system monitor
 cd "$(dirname "$0")"
 
+# Kill any existing main.py process to prevent display conflicts
+pkill -f "python3 main.py" 2>/dev/null || true
+sleep 1
+
 # Save current theme (only if not already MangoHudTheme)
 STATE_DIR="$HOME/.config/mangohud-turing-theme"
 mkdir -p "$STATE_DIR"

@@ -1,6 +1,10 @@
 #!/usr/bin/env fish
 cd (dirname (status --current-filename))
 
+# Kill any existing main.py process to prevent display conflicts
+pkill -f "python3 main.py" 2>/dev/null
+sleep 1
+
 set -l state_dir "$HOME/.config/mangohud-turing-theme"
 set -l saved_theme "3.5inchTheme2"
 if test -f "$state_dir/previous-theme.txt" -a -s "$state_dir/previous-theme.txt"
