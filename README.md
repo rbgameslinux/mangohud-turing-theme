@@ -2,7 +2,7 @@
 
 Exibe dados do MangoHud (FPS, temperaturas, uso de CPU/GPU) na **Turing Smart Screen** enquanto você joga.
 
-<img src="screenshots/theme-preview.jpg" width="300">
+<img src="photo_2026-08-07_14-38-51.jpg" width="300">
 
 ## Funciona com
 
