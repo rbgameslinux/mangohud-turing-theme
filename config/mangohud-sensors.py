@@ -92,17 +92,25 @@ class _MangoHudCache:
 class _MangoHudBase(CustomDataSource):
     _field: str = ""
     _unit: str = ""
-    last_val: List[float] = None
+    _history: dict = {}
 
     def __init__(self):
-        self.last_val = [math.nan] * 30
         self.value = math.nan
+
+    @classmethod
+    def _history_list(cls) -> List[float]:
+        history = cls._history.get(cls.__name__)
+        if history is None:
+            history = [math.nan] * 30
+            cls._history[cls.__name__] = history
+        return history
 
     def as_numeric(self) -> float:
         self.value = _MangoHudCache.get(self._field)
         if not math.isnan(self.value):
-            self.last_val.append(self.value)
-            self.last_val.pop(0)
+            history = self._history_list()
+            history.append(self.value)
+            history.pop(0)
         return self.value
 
     def as_string(self) -> str:
@@ -111,7 +119,7 @@ class _MangoHudBase(CustomDataSource):
         return f'{self.value:>5.1f}{self._unit}'
 
     def last_values(self) -> List[float]:
-        return self.last_val
+        return self._history_list()
 
 
 class MangoHudDistro(CustomDataSource):
@@ -153,12 +161,13 @@ class MangoHudFPS(_MangoHudBase):
         if self.value is not None and not math.isnan(self.value) and self.value > self._max_sane:
             self.value = math.nan
         if not math.isnan(self.value):
-            self.last_val.append(self.value)
-            self.last_val.pop(0)
+            history = self._history_list()
+            history.append(self.value)
+            history.pop(0)
         return self.value
 
     def as_string(self) -> str:
-        valid = [v for v in self.last_val if not math.isnan(v)]
+        valid = [v for v in self._history_list() if not math.isnan(v)]
         if not valid:
             return "---"
         window = valid[-5:]

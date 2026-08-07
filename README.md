@@ -95,11 +95,11 @@ Cada sensor aceita 4 tipos de widget:
 - **TEXT** — valor formatado (ex: "120.5 FPS")
 - **GRAPH** — barra de progresso horizontal (ex: uso %)
 - **RADIAL** — barra circular (não usado neste tema)
-- **LINE_GRAPH** — gráfico de linha histórico (ex: FPS)
+- **LINE_GRAPH** — gráfico de linha histórico (ex: frametime)
 
 ## Como funciona
 
 1. MangoHud salva logs CSV em `~/.config/MangoHud/mangologs/`
-2. O sensor `_MangoHudCache` lê o arquivo mais recente a cada 0.5s
+2. O sensor `_MangoHudCache` lê o arquivo mais recente a cada 1s
 3. As classes `MangoHud*` extraem valores específicos do CSV
 4. O tema exibe os dados na tela Turing através do sistema de custom sensors
