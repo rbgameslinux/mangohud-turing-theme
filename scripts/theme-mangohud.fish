@@ -1,9 +1,6 @@
 #!/usr/bin/env fish
+# Switch to MangoHud gaming theme and restart the system monitor (user service)
 cd (dirname (status --current-filename))
-
-# Kill any existing main.py process to prevent display conflicts
-pkill -f "python3 main.py" 2>/dev/null
-sleep 1
 
 set -l state_dir "$HOME/.config/mangohud-turing-theme"
 mkdir -p "$state_dir"
@@ -14,6 +11,4 @@ end
 
 sed -i 's/THEME: .*/THEME: MangoHudTheme/' config.yaml
 echo "Tema alterado para MangoHudTheme"
-source lcd/bin/activate.fish
-echo "Iniciando system monitor..."
-python3 main.py
+systemctl --user restart mangohud-turing-theme.service

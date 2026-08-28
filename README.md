@@ -30,6 +30,23 @@ O instalador:
 3. Adiciona os sensores customizados ao `library/sensors/sensors_custom.py`
 4. Configura o MangoHud (`~/.config/MangoHud/MangoHud.conf`) com `output_folder` e `autostart_log=5`
 5. Instala os scripts de atalho (`theme-mangohud.sh`, `theme-desktop.sh`)
+6. Instala/habilita o serviço de usuário `mangohud-turing-theme.service` (systemd `--user`)
+
+### Já tinha o turing-smart-screen-python instalado?
+
+Se você já instalou o turing-smart-screen-python antes e criou o **serviço de sistema** (como orienta a wiki oficial, `/etc/systemd/system/turing-smart-screen-python.service` com `Restart=always`), o instalador **detecta automaticamente e pergunta se deseja desativá-lo**.
+
+Isso é importante: se deixar os dois rodando, o `main.py` do sistema e o do usuário ficam **dois processos disputando o display** e a troca de tema só funciona na segunda tecla (mesmo bug relatado em 27/08/2026). O instalador executa:
+
+```bash
+sudo systemctl disable --now turing-smart-screen-python
+```
+
+Se preferir desativar manualmente, rode esse comando antes de usar os atalhos.
+
+> **Dica de desempenho**: se a troca de tema demorar ~6-8s, ajuste no `config.yaml`:
+> - `COM_PORT: "/dev/ttyACM0"` (em vez de `AUTO`) — elimina o auto-detect que falha ao resetar o display
+> - `RESET_ON_STARTUP: false` — evita o reset USB + espera de 5s
 
 ## Uso
 

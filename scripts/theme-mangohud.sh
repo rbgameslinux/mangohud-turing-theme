@@ -1,10 +1,6 @@
 #!/bin/bash
-# Switch to MangoHud gaming theme and start the system monitor
+# Switch to MangoHud gaming theme and restart the system monitor (user service)
 cd "$(dirname "$0")"
-
-# Kill any existing main.py process to prevent display conflicts
-pkill -f "python3 main.py" 2>/dev/null || true
-sleep 1
 
 # Save current theme (only if not already MangoHudTheme)
 STATE_DIR="$HOME/.config/mangohud-turing-theme"
@@ -16,6 +12,4 @@ fi
 
 sed -i 's/THEME: .*/THEME: MangoHudTheme/' config.yaml
 echo "Tema alterado para MangoHudTheme"
-source lcd/bin/activate
-echo "Iniciando system monitor..."
-python3 main.py
+systemctl --user restart mangohud-turing-theme.service
